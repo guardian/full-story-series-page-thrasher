@@ -54,8 +54,18 @@ section##{$containerName} {
     width: 100%;
     margin: 0;
     padding: 0;
-    height:200px;
-    background-color:$backgroundColor;
+    box-sizing: border-box;
+    
+    &__unordered {
+        margin-left: 0px!important;
+    }
+    &__body {
+        margin: 0;
+        padding: 20px;
+        width: 100%;
+        box-sizing: border-box;
+        background-color:$backgroundColor;
+    }
     &__headline {
         color:$textColor;
         font-family:"GuardianTitlepiece","Guardian Headline Full","Guardian Egyptian Web",Georgia,serif;
@@ -68,242 +78,149 @@ section##{$containerName} {
         // mixin takes 3 variables:
         // background-color, text-color, hover-background-color
         @include component-button($bgColor: $neutral-7, $color: #fff, $hoverBgColor: $neutral-46);
+
+
     }
     &__roundel {
         // mixin makes roundel sit top right of thrasher and move with grid
         @include roundel-top-right;
     }
-}
-
-
-// this removes margins from Android / iOS view
-.interactive-atom {
-    margin:0;
-    overflow: hidden;
-}
-
-// iOS and Android specific styles
-.#{$containerName} {
-    .android &,
-    .ios & {
-        overflow:hidden;
-        margin:0;
-        padding:0;
-        &__component-button {
-            span {
-                letter-spacing: unset;
-            }
+    &__artwork {
+        
+        @include mq($until: mobileLandscape) {
+            width: 100%;
+            box-sizing: border-box;
+            height: 0px;
+            padding-bottom: 90%;
+            margin-bottom: 20px;
         }
+
+        @include mq($from: mobileLandscape, $until: tablet) {
+            width: 200px;
+            padding: 20px;
+        }
+
+        @include mq($from: tablet, $until: desktop) {
+            width: 200px;
+            margin-left: 0px;
+            margin-right: 100px;
+            float: left;
+            padding: 20px;
+        }
+
+        @include mq($from: desktop, $until: wide) {
+            width: 200px;
+            margin-left: 100px;
+            margin-right: 100px;
+            float: left;
+            padding: 20px;
+        }
+
+        @include mq($from: wide) {
+            width: 250px;
+            margin-left: 200px;
+            margin-right: 150px;
+            float: left;
+            padding: 20px;
+        }
+
+        .artwork-holder {
+
+            background-image: url("https://interactive.guim.co.uk/embed/aus/thrashers/full-story-series-page/full-story.png");
+            background-size: cover;
+
+            @include mq($until: mobileLandscape) {
+                width: 100%;
+                height: 0px;
+                padding-bottom: 100%;
+                margin: auto;
+                
+                background-size: 90%;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+
+            @include mq($from: mobileLandscape, $until: tablet) {
+                width: 200px;
+                height: 200px;
+            }
+
+            @include mq($from: tablet, $until: desktop) {
+                width: 200px;
+                height: 200px;
+            }
+
+
+            @include mq($from: desktop, $until: wide) {
+                width: 250px;
+                height: 243px;
+            }
+
+            @include mq($from: wide) {
+                width: 250px;
+                height: 243px;
+            }
+
+        }
+
     }
-}
+    &__info {
+        
+        @include mq($until: mobileLandscape) {
+            width: calc(100% - 20px);
+            box-sizing: border-box;
+            padding: 20px;
+            clear: both;
+        }
+
+        @include mq($from: mobileLandscape, $until: tablet) {
+            width: 100%;
+            max-width: 500px;
+            box-sizing: border-box;
+            padding: 20px;
+            padding-top: 0px;
+            clear: both;
+        }
+
+        @include mq($from: tablet, $until: desktop) {
+            margin-top: 40px;
+            display: inline-block;
+            float: left;
+            max-width: 400px;
+            padding: 20px;
+            padding-top: 0px;
+        }
+
+    
+        @include mq($from: desktop, $until: wide) {
+            margin-top: 50px;
+            float: left;
+            display: inline-block;
+            max-width: 450px;
+        }
 
 
-.full-story-series-page__thrasher .full-story-series-page__content {
-    padding-top: 0.375rem;
-}
+        @include mq($from: wide) {display: inline-block;
+            float: left;
+            display: inline-block;
+            margin-top: 50px;
+            max-width: 450px;
+        }
 
-.full-story-series-page__thrasher .full-story-series-page__logo {
-    position: absolute;
-    top: 0.375rem;
-}
+        .hideout {
 
-@media (max-width: 29.99em) {
-    .full-story-series-page__thrasher .full-story-series-page__logo {
-        right: 0;
+            @include mq($until: desktop) {
+                display: none;
+            }
+
+        }
+
     }
-}
-
-@media (min-width: 30em) and (max-width: 71.24em) {
-    .full-story-series-page__thrasher .full-story-series-page__logo {
-        right: 0.625rem;
+    &__link ul {
+        margin-left: 0px;
     }
-}
+    &__button {
 
-@media (min-width: 71.25em) and (max-width: 81.24em) {
-    .full-story-series-page__thrasher .full-story-series-page__logo {
-        -webkit-flex: 1 0 auto;
-        -ms-flex: 1 0 auto;
-        flex: 1 0 auto;
-    }
-}
-
-@media (max-width: 41.24em) {
-    .full-story-series-page__thrasher .full-story-series-page__logo svg {
-        -webkit-transform-origin: top right;
-        transform-origin: top right;
-        -webkit-transform: scale(0.8);
-        transform: scale(0.8);
-    }
-}
-
-.full-story-series-page__thrasher .full-story-series-page__content {
-    padding: 0;
-    -webkit-flex: 1 1 auto;
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
-}
-
-.full-story-series-page__thrasher .full-story-series-page__content::before {
-    display: none;
-}
-
-@media (min-width: 71.25em) {
-    .full-story-series-page__thrasher .full-story-series-page__content::before {
-        display: block;
-        content: '';
-        position: relative;
-        width: 0.0625rem;
-        top: 0;
-        bottom: 0;
-        left: -0.625rem;
-    }
-}
-
-@media (max-width: 61.24em) {
-    .full-story-series-page__thrasher .full-story-series-page__content {
-        -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        border: 0;
-        padding: 0;
-    }
-}
-
-.full-story-series-page__thrasher .full-story-series-page__content .full-story-series-page__description, .full-story-series-page__thrasher .full-story-series-page__content .full-story-series-page__title {
-    max-width: 28.75rem;
-}
-
-.full-story-series-page__thrasher .full-story-series-page__content .full-story-series-page__description {
-    font-size: 1.0625rem;
-    line-height: 1.5rem;
-    font-family: "Guardian Text Egyptian Web", Georgia, serif;
-    padding-top: 0.375rem;
-    margin-top: 0.125rem;
-    margin-bottom: 0.125rem;
-}
-
-.full-story-series-page__thrasher .full-story-series-page__content .full-story-series-page__title {
-    font-size: 2.625rem;
-    line-height: 2.875rem;
-    font-weight: 700;
-    color: #000000;
-    margin-bottom: 0;
-
-    p {
-        color: #ffffff;
-    }
-}
-
-@media (min-width: 20em) and (max-width: 41.24em) {
-    .full-story-series-page__thrasher .full-story-series-page__content .full-story-series-page__title {
-        font-size: 2.125rem;
-        line-height: 2.375rem;
-    }
-}
-
-@media (min-width: 20em) and (max-width: 41.24em) {
-    .full-story-series-page__thrasher .full-story-series-page__artwork {
-        -webkit-flex: 1 1 auto;
-        -ms-flex: 1 1 auto;
-        flex: 1 1 auto;
-        justify-self: flex-end;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-flex-direction: row;
-        -ms-flex-direction: row;
-        flex-direction: row;
-        -webkit-align-items: flex-end;
-        -ms-flex-align: end;
-        align-items: flex-end;
-        -webkit-justify-content: flex-end;
-        -ms-flex-pack: end;
-        justify-content: flex-end;
-    }
-}
-
-@media (min-width: 41.25em) {
-    .full-story-series-page__thrasher .full-story-series-page__artwork {
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        z-index: 8;
-    }
-}
-
-.full-story-series-page__thrasher .full-story-series-page__artwork .artwork-holder {
-    width: 100%;
-    top: 0;
-}
-
-@media (max-width: 22.49em) {
-    .full-story-series-page__thrasher .full-story-series-page__artwork .artwork-holder {
-        margin-bottom: -3rem;
-    }
-}
-
-@media (min-width: 22.5em) and (max-width: 29.99em) {
-    .full-story-series-page__thrasher .full-story-series-page__artwork .artwork-holder {
-        margin-bottom: -2.25rem;
-    }
-}
-
-@media (min-width: 30em) {
-    .full-story-series-page__thrasher .full-story-series-page__artwork .artwork-holder {
-        margin-bottom: -0.375rem;
-    }
-}
-
-@media (min-width: 41.25em) and (max-width: 61.24em) {
-    .full-story-series-page__thrasher .full-story-series-page__artwork .artwork-holder {
-        float: right;
-        position: relative;
-    }
-}
-
-.full-story-series-page__thrasher .full-story-series-page__artwork .artwork-holder svg {
-    overflow: visible;
-}
-
-@media (max-width: 41.24em) {
-    .full-story-series-page__thrasher .full-story-series-page__artwork .artwork-holder svg {
-        width: 100%;
-    }
-}
-
-@media (min-width: 20em) and (max-width: 41.24em) {
-    .full-story-series-page__thrasher .full-story-series-page__artwork {
-        -webkit-justify-content: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-    }
-}
-
-.full-story-series-page__content-buttons {
-    list-style: none;
-    line-height: 1;
-    padding: 1.5rem 0 0.3125rem;
-    background-color: transparent;
-    color: #121212;
-    overflow: auto;
-    display: block;
-    margin: 0;
-}
-
-.full-story-series-page__content-buttons .full-story-series-page__subscribe-label {
-    margin-bottom: 0.375rem;
-    color: #333;
-    font-weight: 800;
-    font-size: 1.0625rem;
-}
-
-.full-story-series-page__button {
     font-size: 0.75rem;
     line-height: 1rem;
     font-family: "Guardian Text Sans Web", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
@@ -321,66 +238,40 @@ section##{$containerName} {
     font-family: 'Guardian Text Sans Web';
     font-size: 0.875rem;
     margin: 0 0.25rem 0.5rem 0;
-}
 
-.full-story-series-page__button span {
-    display: -webkit-inline-flex;
-    display: -ms-inline-flexbox;
-    display: inline-flex;
-}
-
-.full-story-series-page__link:hover {
-    text-decoration: none;
-}
-
-.full-story-series-page__link:hover .full-story-series-page__button {
-    background-color: #121212;
+    }
 }
 
 
+// this removes margins from Android / iOS view
+.interactive-atom {
+    margin:0;
+    overflow: hidden;
+}
 
-.full-story-series-page__content-main {
-    z-index: 9;
-    margin-top: 20px;
-
-    @include mq($until: tablet) {
-        box-sizing: border-box;
-        padding: 20px;
-
-        br {
-            display: none;
+// iOS and Android specific styles
+.#{$containerName} {
+    .android &,
+    .ios & {
+        overflow:hidden;
+        margin:0;
+        padding:20px;
+        &__component-button {
+            span {
+                letter-spacing: unset;
+            }
         }
     }
-    
-    @include mq($from: tablet) {
-        margin-left: 5em;
-    }
-
 }
 
-.full-story-series-page__content-buttons {
 
-    @include mq($until: mobileLandscape) {
-        display: none;
-    }
-    
-}
 
-.inline-full-story-series-page-series-header__svg {
 
-    @include mq($from: mobileLandscape, $until: desktop) {
-        display: none;
-    }
-}
 
-.full-story-series-page__link ul {
-    margin-left: 0px;
-}
 
-.full-story-series-page__thrasher {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    background-color:$backgroundColor;
-}
+
+
+
+
+
 
